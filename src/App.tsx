@@ -1,23 +1,35 @@
-import styled from "styled-components";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+import Router from "./Router";
 
-const Title = styled.h1`
-  color: ${(props) => props.theme.textColor}; ;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
-  background-color: ${(props) => props.theme.backgroundColor};
+const GlobalStyle = createGlobalStyle`
+/* 리셋 */
+${reset}
+/* 폰트 */
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
+/* etc */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
 `;
 
 function App() {
   return (
-    <Wrapper>
-      <Title>안뇽;</Title>
-    </Wrapper>
+    <>
+      <GlobalStyle />
+      <Router></Router>
+      <ReactQueryDevtools initialIsOpen={true}></ReactQueryDevtools>
+    </>
   );
 }
 
