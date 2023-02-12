@@ -2,13 +2,19 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import Router from "./Router";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./theme";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
+
 /* 리셋 */
 ${reset}
 /* 폰트 */
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
-/* etc */
+/* import { isDarkAtom } from './atoms';
+etc */
 * {
   box-sizing: border-box;
 }
@@ -24,11 +30,14 @@ a{
 `;
 
 function App() {
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <>
-      <GlobalStyle />
-      <Router></Router>
-      <ReactQueryDevtools initialIsOpen={true}></ReactQueryDevtools>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <Router></Router>
+        <ReactQueryDevtools initialIsOpen={true}></ReactQueryDevtools>
+      </ThemeProvider>
     </>
   );
 }
