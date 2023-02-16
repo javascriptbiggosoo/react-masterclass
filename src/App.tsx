@@ -4,6 +4,7 @@ import reset from "styled-reset";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./theme";
 import { useRecoilValue } from "recoil";
+import ToDoList from "./components/ToDoList";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -32,6 +33,7 @@ function App() {
     <>
       <ThemeProvider theme={darkTheme}>
         <GlobalStyle />
+        <ToDoList></ToDoList>
       </ThemeProvider>
     </>
   );
